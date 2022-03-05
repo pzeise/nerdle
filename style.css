@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(49, 49, 49);
+}
+
+h1 {
+    font-family: Fredoka;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+input { 
+    background-color: grey;
+    color: white;
+    font-family: Fredoka;
+    font-size: 4rem;
+    width: 5rem;
+    height: 5rem;
+    border-style: solid;
+    border-color: darkgray;
+    text-align: center;
+}
+
+#gameBoard div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

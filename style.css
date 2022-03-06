@@ -19,6 +19,7 @@ input {
     border-style: solid;
     border-color: darkgray;
     text-align: center;
+    text-transform: lowercase;
 }
 
 #gameBoard div {

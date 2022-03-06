@@ -28,3 +28,11 @@ input {
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+@media (max-width: 800px) {
+    input { 
+        font-size: 1rem;
+        width: 2rem;
+        height: 2rem;
+    }
+}

@@ -8,8 +8,8 @@ let wordChoices = [
     "rogue", "nerdy", "comic", 
     "gnome", "cower"
 ]
-
-dailyWord = pickDailyWord(wordChoices).split("")
+let displayWord = pickDailyWord(wordChoices)
+let dailyWord = displayWord.split("")
 console.log(dailyWord);
 
 function pickDailyWord (options) {
@@ -21,7 +21,8 @@ attempts.forEach(attempt => {
     for (let i =0; i < 5; i++) {
         let letter = document.createElement("input")
         letter.type = "text"
-        letter.oninput = "this.value = this.value.replace(/[^a-z]/, '')"
+        //replaces anything that is not a lower case letter with nothing
+        letter.addEventListener(`input`, ev => ev.target.value = ev.target.value.replace(/[^a-z]/, ''))
         letter.maxLength = "1"
         letter.classList.add(`letter${i}`)
         letter.classList.add(`letter`)
@@ -33,6 +34,9 @@ attempts.forEach(attempt => {
 let first = document.querySelector("input")
 first.disabled = false
 first.focus()
+
+//set current row will be iterated by checkEnter() later
+attempts[0].classList.add(`currentRow`)
 
 //step through letters as you type
 let allLetters = document.querySelectorAll("input")
@@ -87,6 +91,7 @@ function checkEnter(ev) {
         // console.log(`in the backspace check`);
         if (ev.target.classList.contains('letter4') && ev.target.value != "") {
             // console.log(`we're in the enter check`);
+            ev.target.disabled = true
             checkAnswer()
         }
     }
@@ -94,19 +99,54 @@ function checkEnter(ev) {
 
 function checkAnswer () {
     // console.log(`inside checkAnswer`);
+    let userGuess = []
     for (let i = 0; i < 5; i++) {
-        let currentTile = document.querySelector(`.letter${i}`)
-        console.log(currentTile);
+        let currentTile = document.querySelector(`.currentRow .letter${i}`)
+        // console.log(currentTile);
         if (dailyWord[i] === currentTile.value) {
-            console.log(`we have verified letters match!`);
+            // console.log(`we have verified letters match!`);
             currentTile.style.background = "darkgreen";
-
             //record the correct letter so we can log repeats
         } else if (dailyWord.some(x => x === currentTile.value /* compare against log to catch repeats */)) { 
-            console.log(`we have verified letters in word!`);
+            // console.log(`we have verified letters in word!`);
             currentTile.style.background = "goldenrod";
+        } else {
+            currentTile.style.background = "rgb(64, 62, 59)";
         }
+        userGuess.push(currentTile.value)
     }
+    
+    if (!checkWin(userGuess)) {
+        //bumping to the next row and making it the new currentRow
+        let currentRow = document.querySelector(`.currentRow`)
+        let nextRow = document.querySelector(`.currentRow`).nextElementSibling
+        // console.log(currentRow);
+        // console.log(nextRow);
+        if (nextRow) {
+            // console.log(nextRow.firstElementChild);
+            nextRow.classList.add(`currentRow`)
+            nextRow.firstElementChild.disabled = false
+            nextRow.firstElementChild.focus()
+            currentRow.classList.remove(`currentRow`)
+        } 
+    }    
+}
+
+function checkWin (guess) {
+    console.log(`inside checkWin`);
+    let currentRow = document.querySelector(`.currentRow`)
+    console.log(currentRow.classList.contains(`attempt6`));
+    if (guess.toString() === dailyWord.toString()) {
+        console.log(`They match...`);
+        currentRow.classList.remove(`currentRow`)
+        console.log(document.querySelector(`h1`));
+        document.querySelector(`h1`).innerText = `YOU WIN!`
+        return true
+    } else if (currentRow.id === `attempt6`) {
+        console.log(`ending game`);
+        document.querySelector(`h1`).innerText = `No Dice the word was ${displayWord} :( Better luck tomorrow!` 
+        return true
+    } else return false
 }
 
 

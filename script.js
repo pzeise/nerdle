@@ -157,7 +157,3 @@ function checkWin (guess) {
         return true
     } else return false
 }
-
-
-// verify word on first row
-// add in bumping to next row functionality

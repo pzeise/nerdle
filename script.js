@@ -7,16 +7,21 @@ let wordChoices = [
     "robot", "chest", "sword", 
     "rogue", "nerdy", "comic", 
     "gnome", "cower", "guild",
-    "units", "armor", "stash",
+    "magic", "armor", "stash",
     "score", "prowl", "wreck",
     "leech", "slide", "bravo",
     "super", "mecha", "drake",
     "dwell", "delve", "hound",
     "guide", "ruler", "prime",
+    "novel", "witch", "flame",
+    "mercy", "torch", "blood",
+    "story", "realm", "hoard",
+    "pixie", "knoll", "gnoll",
+    "amber", "ninja", "shark",
 ]
 let displayWord = pickDailyWord(wordChoices)
 let dailyWord = displayWord.split("")
-console.log(dailyWord);
+console.log(dailyWord)
 
 function pickDailyWord (options) {
     return options[Math.floor(Math.random() * options.length)]
@@ -49,11 +54,11 @@ let allLetters = document.querySelectorAll("input")
 allLetters.forEach(input => {
     input.addEventListener("keyup", letter => {
         if (letter.target.value.length === letter.target.maxLength){
-        // console.log(`inside length check`);
+        // console.log(`inside length check`)
             if (letter.target.nextSibling) {
-                // console.log(`inside focus change`);
+                // console.log(`inside focus change`)
                 letter.target.disabled = true
-                // console.log(letter);
+                // console.log(letter)
                 letter.target.nextSibling.disabled = false
                 letter.target.nextSibling.focus()
             } 
@@ -66,7 +71,7 @@ allLetters.forEach(input => {
     input.addEventListener("keydown", letter => {
         checkBackspace(letter)
         if (letter.target.classList.contains('letter4')) {
-            // console.log(`were about to call check enter`);
+            // console.log(`were about to call check enter`)
             checkEnter(letter)
         }
     })
@@ -75,11 +80,11 @@ allLetters.forEach(input => {
 
 function checkBackspace (ev) {
     if (ev.key === "Backspace" || ev.key === "Delete") {
-        // console.log(`in the backspace check`);
+        // console.log(`in the backspace check`)
         if (ev.target.previousSibling.type === "text") {
-            // console.log(ev.target.previousSibling);
-            // console.log(`found backspace`);
-            // console.log(ev);
+            // console.log(ev.target.previousSibling)
+            // console.log(`found backspace`)
+            // console.log(ev)
             //disable current field and push the cursor back, clearing both fields as you do
             ev.target.disabled = true
             ev.target.value = ""
@@ -91,12 +96,12 @@ function checkBackspace (ev) {
 }
 
 function checkEnter(ev) {
-    // console.log(`we're in checkEnter: ${ev}`, ev);
-    // console.log(ev.key);
+    // console.log(`we're in checkEnter: ${ev}`, ev)
+    // console.log(ev.key)
     if (ev.key === "Enter") {
-        // console.log(`in the backspace check`);
+        // console.log(`in the backspace check`)
         if (ev.target.classList.contains('letter4') && ev.target.value != "") {
-            // console.log(`we're in the enter check`);
+            // console.log(`we're in the enter check`)
             ev.target.disabled = true
             checkAnswer()
         }
@@ -104,32 +109,62 @@ function checkEnter(ev) {
 }
 
 function checkAnswer () {
-    // console.log(`inside checkAnswer`);
+    console.log(`inside checkAnswer`)
     let userGuess = []
+    //create a log of letters so we can account for double letters in guess and answers
+    let letterLog = dailyWord.reduce((total, word) => {
+        if (word in total) {
+            total[word]++
+        } else {
+            total[word] = 1
+        }
+        return total
+    }, {})
+    
     for (let i = 0; i < 5; i++) {
         let currentTile = document.querySelector(`.currentRow .letter${i}`)
-        // console.log(currentTile);
-        if (dailyWord[i] === currentTile.value) {
-            // console.log(`we have verified letters match!`);
-            currentTile.style.background = "darkgreen";
-            //record the correct letter so we can log repeats
-        } else if (dailyWord.some(x => x === currentTile.value /* compare against log to catch repeats */)) { 
-            // console.log(`we have verified letters in word!`);
-            currentTile.style.background = "goldenrod";
+        let currentLetter = currentTile.value
+        // console.log(currentTile)
+        console.log(currentLetter)
+        console.log(letterLog)
+        console.log(letterLog[`${currentLetter}`])
+        console.log(letterLog[currentLetter])
+        if (dailyWord[i] === currentLetter) {
+            console.log(`we have verified letters match!`)
+            currentTile.style.background = "darkgreen"
+            letterLog[`${currentLetter}`]--
+            console.log(letterLog)
+
+            //remove letter form log so that we're keep track to not give users wrong info
+            if (letterLog[currentLetter] <= 0) {
+                delete letterLog[`${currentLetter}`]
+            }
+            // console.log(letterLog)
+        } else if (dailyWord.some(x => x === currentLetter) && currentLetter in letterLog) { 
+            console.log(`we have verified letters in word!`)
+            currentTile.style.background = "goldenrod"
+            letterLog[`${currentLetter}`]--
+            // console.log(letterLog[currentLetter])
+            
+            //remove letter form log so that we're keep track to not give users wrong info
+            if (letterLog[currentLetter] <= 0) {
+                delete letterLog[`${currentLetter}`]
+            }
+            // console.log(letterLog)
         } else {
-            currentTile.style.background = "rgb(64, 62, 59)";
+            currentTile.style.background = "rgb(64, 62, 59)"
         }
-        userGuess.push(currentTile.value)
+        userGuess.push(currentLetter)
     }
     
     if (!checkWin(userGuess)) {
         //bumping to the next row and making it the new currentRow
         let currentRow = document.querySelector(`.currentRow`)
         let nextRow = document.querySelector(`.currentRow`).nextElementSibling
-        // console.log(currentRow);
-        // console.log(nextRow);
+        // console.log(currentRow)
+        // console.log(nextRow)
         if (nextRow) {
-            // console.log(nextRow.firstElementChild);
+            // console.log(nextRow.firstElementChild)
             nextRow.classList.add(`currentRow`)
             nextRow.firstElementChild.disabled = false
             nextRow.firstElementChild.focus()
@@ -139,17 +174,17 @@ function checkAnswer () {
 }
 
 function checkWin (guess) {
-    console.log(`inside checkWin`);
+    console.log(`inside checkWin`)
     let currentRow = document.querySelector(`.currentRow`)
-    console.log(currentRow.classList.contains(`attempt6`));
+    console.log(currentRow.classList.contains(`attempt6`))
     if (guess.toString() === dailyWord.toString()) {
-        console.log(`They match...`);
+        console.log(`They match...`)
         currentRow.classList.remove(`currentRow`)
-        console.log(document.querySelector(`h1`));
+        console.log(document.querySelector(`h1`))
         document.querySelector(`h1`).innerText = `YOU WIN!`
         return true
     } else if (currentRow.id === `attempt6`) {
-        console.log(`ending game`);
+        console.log(`ending game`)
         document.querySelector(`h1`).innerText = `No Dice the word was ${displayWord} :( Better luck tomorrow!` 
         return true
     } else return false

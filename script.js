@@ -6,7 +6,13 @@ let wordChoices = [
     "anime", "dwarf", "furry", 
     "robot", "chest", "sword", 
     "rogue", "nerdy", "comic", 
-    "gnome", "cower"
+    "gnome", "cower", "guild",
+    "units", "armor", "stash",
+    "score", "prowl", "wreck",
+    "leech", "slide", "bravo",
+    "super", "mecha", "drake",
+    "dwell", "delve", "hound",
+    "guide", "ruler", "prime",
 ]
 let displayWord = pickDailyWord(wordChoices)
 let dailyWord = displayWord.split("")

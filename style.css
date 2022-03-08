@@ -20,6 +20,8 @@ input {
     border-color: darkgray;
     text-align: center;
     text-transform: lowercase;
+    -webkit-user-select: text;
+    user-select: text;
 }
 
 #gameBoard div {

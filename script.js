@@ -91,13 +91,12 @@ function checkEnter(ev) {
     if (ev.key === "Enter") {
         if (ev.target.classList.contains('letter4') && ev.target.value != "") {
             ev.target.disabled = true
-            checkAnswer()
+            submit()
         }
     }
 }
 
-function checkAnswer () {
-    let userGuess = []
+function submit () {
     //create a log of letters so we can account for double letters in guess and answers
     let letterLog = dailyWord.reduce((total, word) => {
         if (word in total) {
@@ -107,31 +106,8 @@ function checkAnswer () {
         }
         return total
     }, {})
-
-    for (let i = 0; i < 5; i++) {
-        let currentTile = document.querySelector(`.currentRow .letter${i}`)
-        let currentLetter = currentTile.value
-        if (dailyWord[i] === currentLetter) {
-            currentTile.style.background = "darkgreen"
-            letterLog[`${currentLetter}`]--
-
-            //remove letter form log so that we're keep track to not give users wrong info
-            if (letterLog[currentLetter] <= 0) {
-                delete letterLog[`${currentLetter}`]
-            }
-        } else if (dailyWord.some(x => x === currentLetter) && currentLetter in letterLog) { 
-            currentTile.style.background = "goldenrod"
-            letterLog[`${currentLetter}`]--
-            
-            //remove letter form log so that we're keep track to not give users wrong info
-            if (letterLog[currentLetter] <= 0) {
-                delete letterLog[`${currentLetter}`]
-            }
-        } else {
-            currentTile.style.background = "rgb(64, 62, 59)"
-        }
-        userGuess.push(currentLetter)
-    }
+    
+    let userGuess = checkAnswer(letterLog)
     
     if (!checkWin(userGuess)) {
         //bumping to the next row and making it the new currentRow
@@ -143,7 +119,47 @@ function checkAnswer () {
             nextRow.firstElementChild.focus()
             currentRow.classList.remove(`currentRow`)
         } 
-    }    
+    }  
+}
+
+function checkAnswer (log) {
+
+    let guess = document.querySelectorAll(`.currentRow .letter`)
+    let correctTiles = []
+    let possibleTiles = []
+    let userGuess = []
+    
+    for (let i = 0; i < dailyWord.length; i++) {
+        let currentLetter = guess[i].value
+        if (dailyWord[i] === currentLetter) {
+            correctTiles.push(guess[i])
+            log[`${currentLetter}`]--
+            //remove letter form log so that we're keep track to not give users wrong info
+            if (log[currentLetter] <= 0) {
+                delete log[`${currentLetter}`]
+            }
+        } 
+        userGuess.push(currentLetter)
+    }
+
+    guess.forEach(letter => {
+        if (dailyWord.some(x => x === letter.value) && letter.value in log) {
+            possibleTiles.push(letter)
+            log[`${letter.value}`]--
+            if (log[`${letter.value}`] <= 0){
+                delete log[`${letter.value}`]
+            }
+        }
+    })
+
+    updateColor(correctTiles, possibleTiles, guess)
+    return userGuess
+}
+
+function updateColor (green, yellow, tiles) {
+    tiles.forEach(ev => ev.style.background = "rgb(64, 62, 59)")
+    green.forEach(ev => ev.style.background = "darkgreen")
+    yellow.forEach(ev => ev.style.background = "goldenrod")
 }
 
 function checkWin (guess) {

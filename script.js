@@ -39,6 +39,8 @@ attempts.forEach(attempt => {
         letter.classList.add(`letter`)
         attempt.appendChild(letter)
         letter.disabled = true
+        letter.autocorrect = "off"
+        letter.autocapitalize = "none"
     }
 })
 //enable first letter

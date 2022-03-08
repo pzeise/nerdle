@@ -23,7 +23,7 @@ input {
     -webkit-user-select: text;
     user-select: text;
     border-radius: 0;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
 
 #gameBoard div {

@@ -30,7 +30,7 @@ input {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 @media (max-width: 800px) {

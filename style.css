@@ -35,8 +35,8 @@ input {
 
 @media (max-width: 800px) {
     input { 
-        font-size: fill;
-        width: 15%;
+        font-size: 6vw;
+        width: 10vw;
         height: calc(100vw * .15);
         }
 }

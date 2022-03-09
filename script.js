@@ -1,4 +1,9 @@
-// let allLetters = document.querySelectorAll("input")
+//Set up the game board and word selection, listen for typing and submissions. 
+//gameElements is for backend calcs and comparisons
+//visuals is for updating the UI as the game proceeds
+//verify is to check submissions against a dictionary API
+
+
 let attempts = document.querySelectorAll(".attempts")
 let turn = 0
 
@@ -96,82 +101,4 @@ function checkEnter(ev) {
             submit()
         }
     }
-}
-
-function submit () {
-    //create a log of letters so we can account for double letters in guess and answers
-    let letterLog = dailyWord.reduce((total, word) => {
-        if (word in total) {
-            total[word]++
-        } else {
-            total[word] = 1
-        }
-        return total
-    }, {})
-    
-    let userGuess = checkAnswer(letterLog)
-    
-    if (!checkWin(userGuess)) {
-        //bumping to the next row and making it the new currentRow
-        let currentRow = document.querySelector(`.currentRow`)
-        let nextRow = document.querySelector(`.currentRow`).nextElementSibling
-        if (nextRow) {
-            nextRow.classList.add(`currentRow`)
-            nextRow.firstElementChild.disabled = false
-            nextRow.firstElementChild.focus()
-            currentRow.classList.remove(`currentRow`)
-        } 
-    }  
-}
-
-function checkAnswer (log) {
-
-    let guess = document.querySelectorAll(`.currentRow .letter`)
-    let correctTiles = []
-    let possibleTiles = []
-    let userGuess = []
-    
-    for (let i = 0; i < dailyWord.length; i++) {
-        let currentLetter = guess[i].value
-        if (dailyWord[i] === currentLetter) {
-            correctTiles.push(guess[i])
-            log[`${currentLetter}`]--
-            //remove letter form log so that we're keep track to not give users wrong info
-            if (log[currentLetter] <= 0) {
-                delete log[`${currentLetter}`]
-            }
-        } 
-        userGuess.push(currentLetter)
-    }
-
-    guess.forEach(letter => {
-        if (dailyWord.some(x => x === letter.value) && letter.value in log) {
-            possibleTiles.push(letter)
-            log[`${letter.value}`]--
-            if (log[`${letter.value}`] <= 0){
-                delete log[`${letter.value}`]
-            }
-        }
-    })
-
-    updateColor(correctTiles, possibleTiles, guess)
-    return userGuess
-}
-
-function updateColor (green, yellow, tiles) {
-    tiles.forEach(ev => ev.style.background = "rgb(64, 62, 59)")
-    green.forEach(ev => ev.style.background = "darkgreen")
-    yellow.forEach(ev => ev.style.background = "goldenrod")
-}
-
-function checkWin (guess) {
-    let currentRow = document.querySelector(`.currentRow`)
-    if (guess.toString() === dailyWord.toString()) {
-        currentRow.classList.remove(`currentRow`)
-        document.querySelector(`h1`).innerText = `YOU WIN!`
-        return true
-    } else if (currentRow.id === `attempt6`) {
-        document.querySelector(`h1`).innerText = `No Dice the word was ${displayWord} :( Better luck tomorrow!` 
-        return true
-    } else return false
 }

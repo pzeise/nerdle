@@ -59,7 +59,7 @@ attempts[0].classList.add(`currentRow`)
 //step through letters as you type
 let allLetters = document.querySelectorAll("input")
 allLetters.forEach(input => {
-    input.addEventListener("keyup", letter => {
+    input.addEventListener("keydown", letter => {
         if (letter.target.value.length === letter.target.maxLength){
             if (letter.target.nextSibling) {
                 letter.target.disabled = true

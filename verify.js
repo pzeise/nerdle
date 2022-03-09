@@ -16,16 +16,16 @@ function verifyGuess () {
     })
     .then(response => {
         console.log(response.ok);
-        if (!response.ok) {
-            document.querySelector(`h1`).innerText = `Sorry ${wordGuess} does not appear in our dictionary!`
-            invalidWord()
-            return
-        } else {
+        if (wordChoices.some(word => word === wordGuess) || response.ok) {
             updateColor(correctTiles, possibleTiles, guess)
             if (!checkWin(userGuess)) {
                 bumpRow()
             }
-        } // maybe this is untested
+            return
+        } else {
+            invalidWord(wordGuess)
+            return
+        } 
     })
     .catch(err => {
         console.error(err);
@@ -33,12 +33,12 @@ function verifyGuess () {
 }
 
 
-function invalidWord () {
+function invalidWord (badWord) {
+    console.log(`in invalidWord`);
+    document.querySelector(`h1`).innerText = `Sorry ${badWord} does not appear in our dictionary!`
     let lastTile = document.querySelector(`.currentRow .letter4`)
-    lastTile.disabled = "false"
+    console.log(lastTile);
+    lastTile.disabled = false
     lastTile.focus()
+    console.log(lastTile);
 }
-
-//things to call from inside color change
-    //row bump
-    //check win

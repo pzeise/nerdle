@@ -38,7 +38,7 @@ attempts.forEach(attempt => {
         let letter = document.createElement("input")
         letter.type = "text"
         //replaces anything that is not a lower case letter with nothing
-        letter.addEventListener(`input`, ev => ev.target.value = ev.target.value.replace(/[^a-z]/, ''))
+        letter.addEventListener(`input`, ev => ev.target.value = ev.target.value.replace(/[^a-zA-Z]/, ''))
         letter.maxLength = "1"
         letter.classList.add(`letter${i}`)
         letter.classList.add(`letter`)
@@ -70,6 +70,8 @@ allLetters.forEach(input => {
     })
 })
 
+
+//SOLVE DOUBLE DELETE
 //listen for delete/backspaces
 allLetters.forEach(input => {
     input.addEventListener("keydown", letter => {

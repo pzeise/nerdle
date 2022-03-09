@@ -5,8 +5,11 @@
 
 
 function verifyGuess () {
+    //update global array with the answers
     let guess = checkAnswer()
+    //convert to a human readable string
     let wordGuess = userGuess.toString().replace(/,/g, '')
+    //pass that into a dictionary
     fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordGuess}`, {
         "method": "GET",
         "headers": {
@@ -14,18 +17,9 @@ function verifyGuess () {
             "x-rapidapi-key": "91da949df7mshce126bb237596e4p1d2602jsnb825b816aaff"
         }
     })
+    //wait for dictionary to kick off turn end. 
     .then(response => {
-        console.log(response.ok);
-        if (wordChoices.some(word => word === wordGuess) || response.ok) {
-            updateColor(correctTiles, possibleTiles, guess)
-            if (!checkWin(userGuess)) {
-                bumpRow()
-            }
-            return
-        } else {
-            invalidWord(wordGuess)
-            return
-        } 
+        turnEnd(response, guess, wordGuess)
     })
     .catch(err => {
         console.error(err);
@@ -34,11 +28,21 @@ function verifyGuess () {
 
 
 function invalidWord (badWord) {
-    console.log(`in invalidWord`);
     document.querySelector(`h1`).innerText = `Sorry ${badWord} does not appear in our dictionary!`
     let lastTile = document.querySelector(`.currentRow .letter4`)
-    console.log(lastTile);
     lastTile.disabled = false
     lastTile.focus()
-    console.log(lastTile);
+}
+
+function turnEnd (res, checkString, printString) {
+    if (wordChoices.some(word => word === printString) || res.ok) {
+        updateColor(correctTiles, possibleTiles, checkString)
+        if (!checkWin(userGuess)) {
+            bumpRow()
+        }
+        return
+    } else {
+        invalidWord(printString)
+        return
+    } 
 }

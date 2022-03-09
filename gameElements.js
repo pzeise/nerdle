@@ -57,7 +57,7 @@ function checkAnswer () {
     }
     //Check if current letter is in the answer at all
     guess.forEach(letter => {
-        if (dailyWord.some(x => x === letter.value) && letter.value in letterLog) {
+        if (dailyWord.some(x => x === letter.value) && letter.value in letterLog && !correctTiles.some(x => x === letter)) {
             possibleTiles.push(letter)
             letterLog[`${letter.value}`]--
             if (letterLog[`${letter.value}`] <= 0){

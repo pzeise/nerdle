@@ -56,46 +56,45 @@ first.focus()
 //set current row will be iterated by checkEnter() later
 attempts[0].classList.add(`currentRow`)
 
-//step through letters as you type
+//listen as you type
 let allLetters = document.querySelectorAll("input")
 allLetters.forEach(input => {
     input.addEventListener("keydown", letter => {
-        if (letter.target.value.length === letter.target.maxLength){
-            if (letter.target.nextSibling) {
-                letter.target.disabled = true
-                letter.target.nextSibling.disabled = false
-                letter.target.nextSibling.focus()
-            } 
-        }   
-    })
-})
-
-
-//SOLVE DOUBLE DELETE
-//listen for delete/backspaces
-allLetters.forEach(input => {
-    input.addEventListener("keydown", letter => {
-        checkBackspace(letter)
+        typing(letter)
+        checkBackspace(letter) 
         if (letter.target.classList.contains('letter4')) {
             checkEnter(letter)
-        }
+        } 
     })
 })
 
+//type forward if you fill input
+function typing (ev) {
+    if (ev.target.value.length === ev.target.maxLength && ev.target.nextSibling && ev.key != "Backspace" && ev.key != "Delete"){
+        ev.target.disabled = true
+        ev.target.nextSibling.disabled = false
+        ev.target.nextSibling.focus()
+    }
+}
 
+//backspace smoothly
 function checkBackspace (ev) {
     if (ev.key === "Backspace" || ev.key === "Delete") {
-        if (ev.target.previousSibling.type === "text") {
+        if (ev.target.previousSibling.type === "text" && ev.target.value.length != ev.target.maxLength) {
             //disable current field and push the cursor back, clearing both fields as you do
+            console.log(ev.target.value.length);
+            console.log(ev.target.maxLength);
             ev.target.disabled = true
             ev.target.value = ""
             ev.target.previousSibling.value = ""
             ev.target.previousSibling.disabled = false
             ev.target.previousSibling.focus()
+            return true
         }
-    }
+    } else return false
 }
 
+//kick off game if you hit enter in the right spot
 function checkEnter(ev) {
     if (ev.key === "Enter") {
         if (ev.target.classList.contains('letter4') && ev.target.value != "") {

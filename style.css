@@ -108,7 +108,7 @@ input {
 }
 
 #back, #enter {
-    width: 10vw;
+    width: 16vw;
 }
 
 /*Hopefully make my game board visible for people on iOS*/
@@ -155,5 +155,9 @@ input:disabled {
         width: 5vw;
         height: calc(.06*100vw);
         border-radius: 3px;
+    }
+
+    #back, #enter {
+        width: 10vw;
     }
 }

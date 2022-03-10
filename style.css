@@ -69,26 +69,21 @@ input {
     display: flex;
     flex-direction: column;
     align-self: flex-end;
+    margin-left: 15vw;
+    margin-right: 15vw;
 }
 
 .keyBoardRows {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 15vw;
-    margin-right: 15vw;
     margin-top: 1vh;
 }
 
 #secondRow {
-    margin-left: 20vw;
-    margin-right: 20vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
-
-/* #thirdRow {
-    margin-left: 26.6vw;
-    margin-right: 26.6vw;
-} */
 
 .key {
     font-family: 'Roboto', sans-serif;
@@ -114,7 +109,9 @@ input {
 
 /*Hopefully make my game board visible for people on iOS*/
 input:disabled {
-    -webkit-text-fill-color: currentColor;
+    color: white;
+    -webkit-color: white;
+    -webkit-text-fill-color: white;
     opacity: 1;
 }
 
@@ -139,4 +136,9 @@ input:disabled {
         width: 10vw;
         height: calc(100vw * .10);
         }
+    #keyboard {
+        margin-top: 5vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
 }

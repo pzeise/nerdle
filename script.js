@@ -52,8 +52,12 @@ attempts.forEach(attempt => {
         letter.autocorrect = "off"
         letter.autocapitalize = "none"
         letter.onfocus = "blur();"
+        if (document.defaultView.screen.width <= 800) {
+            letter.readOnly = true
+        }
     }
 })
+
 //enable first letter
 let first = document.querySelector("input")
 first.disabled = false
@@ -65,6 +69,7 @@ attempts[0].classList.add(`currentRow`)
 
 //listen as you type
 let allLetters = document.querySelectorAll("input")
+
 allLetters.forEach(input => {
     input.addEventListener("keydown", letter => {
         typing(letter.target, letter.key)

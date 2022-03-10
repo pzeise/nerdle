@@ -3,8 +3,8 @@ setupKeys = [
     "q","w","e","r","t","y",
     "u","i","o","p","a","s",
     "d","f","g","h","j","k",
-    "l","z","x","c","v","b",
-    "n","m"]
+    "l","enter","z","x","c",
+    "v","b","n","m", "back"]
 
 
 let firstRow = document.querySelector("#firstRow")
@@ -12,8 +12,8 @@ let secondRow = document.querySelector("#secondRow")
 let thirdRow = document.querySelector("#thirdRow")
 
 for (i = 0; i < setupKeys.length; i++) {
-    let key = document.createElement("div")
-    // letter.addEventListener(`input`, ev => ev.target.value = ev.target.value.replace(/[^a-zA-Z]/, ''))
+    let key = document.createElement("an")
+    key.addEventListener(`click`, ev => keyBoardType(ev))
     key.id = `${setupKeys[i]}`
     key.classList.add(`key`)
     key.innerText = `${setupKeys[i]}`
@@ -24,4 +24,19 @@ for (i = 0; i < setupKeys.length; i++) {
     } else {
         thirdRow.appendChild(key)
     }
+}
+
+const keyBoard = document.querySelectorAll(".key")
+
+function keyBoardType (key) {
+    let currentTile = document.querySelector(".currentTile")
+    if (key.target.id === "back") {
+        checkBackspace(currentTile, "Backspace")
+    } else if (key.target.id === "enter") {
+        checkEnter(currentTile, "Enter")
+    } else {
+        currentTile.value = key.target.innerText
+        typing(currentTile, key.target.innerText)
+    }
+    
 }

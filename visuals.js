@@ -10,12 +10,32 @@ function bumpRow () {
         nextRow.classList.add(`currentRow`)
         nextRow.firstElementChild.disabled = false
         nextRow.firstElementChild.focus()
+        nextRow.firstElementChild.classList.add(`currentTile`)
         currentRow.classList.remove(`currentRow`)
+        currentRow.lastElementChild.classList.remove(`currentTile`)
     } 
 }
 
 function updateColor (green, yellow, tiles) {
-    tiles.forEach(ev => ev.style.background = "rgb(64, 62, 59)")
-    green.forEach(ev => ev.style.background = "darkgreen")
-    yellow.forEach(ev => ev.style.background = "goldenrod")
+    tiles.forEach(tile => {
+        tile.style.background = "rgb(64, 62, 59)"
+        keyBoard.forEach(key => {
+            if (key.innerText === tile.value){
+                key.style.background = "rgb(64, 62, 59)"
+            }})
+    })
+    green.forEach(tile => {
+        tile.style.background = "darkgreen"
+        keyBoard.forEach(key => {
+            if (key.innerText === tile.value){
+                key.style.background = "darkgreen"
+            }})
+    })
+    yellow.forEach(tile => {
+        tile.style.background = "goldenrod"
+        keyBoard.forEach(key => {
+            if (key.innerText === tile.value){
+                key.style.background = "goldenrod"
+        }})
+    })
 }

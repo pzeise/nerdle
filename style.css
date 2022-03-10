@@ -3,7 +3,7 @@ body {
 }
 
 h1 {
-    font-family: Fredoka;
+    font-family: 'Roboto', sans-serif;
     color: white;
     display: flex;
     justify-content: center;
@@ -12,7 +12,7 @@ h1 {
 input { 
     background-color: grey;
     color: white;
-    font-family: Fredoka;
+    font-family: 'Roboto', sans-serif;
     font-size: 4rem;
     width: 5rem;
     height: 5rem;
@@ -26,11 +26,56 @@ input {
     /* -webkit-appearance: none; */
 }
 
+#gameBoard {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+#keyBoard {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+
 .keyBoardRows {
     display: flex;
-    justify-content: center;
     flex-direction: row;
-    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-top: 1vh;
+}
+
+#secondRow {
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+/* #thirdRow {
+    margin-left: 26.6vw;
+    margin-right: 26.6vw;
+} */
+
+.key {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    line-height: calc(.055*100vw);
+    font-size: 3vw;
+    background-color: #E0E0E4;
+    width: 5vw;
+    height: calc(.06*100vw);
+    border-radius: 3px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+#back, #enter {
+    width: 10vw;
 }
 
 /*Hopefully make my game board visible for people on iOS*/
@@ -47,6 +92,9 @@ input:disabled {
 }
 
 @media (max-width: 800px) {
+    h1 {
+        font-size: 5vw;
+    }
     input { 
         font-size: 6vw;
         width: 10vw;

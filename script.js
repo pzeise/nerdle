@@ -57,6 +57,7 @@ attempts.forEach(attempt => {
 let first = document.querySelector("input")
 first.disabled = false
 first.focus()
+first.classList.add(`currentTile`)
 
 //set current row will be iterated by checkEnter() later
 attempts[0].classList.add(`currentRow`)
@@ -65,45 +66,46 @@ attempts[0].classList.add(`currentRow`)
 let allLetters = document.querySelectorAll("input")
 allLetters.forEach(input => {
     input.addEventListener("keydown", letter => {
-        typing(letter)
-        checkBackspace(letter) 
+        typing(letter.target, letter.key)
+        checkBackspace(letter.target, letter.key) 
         if (letter.target.classList.contains('letter4')) {
-            checkEnter(letter)
+            checkEnter(letter.target, letter.key)
         } 
     })
 })
 
 //type forward if you fill input
-function typing (ev) {
-    if (ev.target.value.length === ev.target.maxLength && ev.target.nextSibling && ev.key != "Backspace" && ev.key != "Delete"){
-        ev.target.disabled = true
-        ev.target.nextSibling.disabled = false
-        ev.target.nextSibling.focus()
+function typing (currentTile, key) {
+    if (currentTile.value.length === currentTile.maxLength && currentTile.nextSibling && key != "Backspace" && key != "Delete"){
+        currentTile.disabled = true
+        currentTile.classList.remove(`currentTile`)
+        currentTile.nextSibling.disabled = false
+        currentTile.nextSibling.focus()
+        currentTile.nextSibling.classList.add(`currentTile`)
     }
 }
 
 //backspace smoothly
-function checkBackspace (ev) {
-    if (ev.key === "Backspace" || ev.key === "Delete") {
-        if (ev.target.previousSibling.type === "text" && ev.target.value.length != ev.target.maxLength) {
-            //disable current field and push the cursor back, clearing both fields as you do
-            console.log(ev.target.value.length);
-            console.log(ev.target.maxLength);
-            ev.target.disabled = true
-            ev.target.value = ""
-            ev.target.previousSibling.value = ""
-            ev.target.previousSibling.disabled = false
-            ev.target.previousSibling.focus()
-            return true
-        }
-    } else return false
+function checkBackspace (currentTile, key) {
+    if ((key === "Backspace" || key === "Delete") && currentTile.value.length === currentTile.maxLength) {
+        currentTile.value = ""
+    } else if ((key === "Backspace" || key === "Delete") && currentTile.previousSibling.type === "text") {
+        //disable current field and push the cursor back, clearing both fields as you do
+        currentTile.disabled = true
+        currentTile.value = ""
+        currentTile.classList.remove(`currentTile`)
+        currentTile.previousSibling.value = ""
+        currentTile.previousSibling.disabled = false
+        currentTile.previousSibling.focus()
+        currentTile.previousSibling.classList.add(`currentTile`)
+    }
 }
 
 //kick off game if you hit enter in the right spot
-function checkEnter(ev) {
-    if (ev.key === "Enter") {
-        if (ev.target.classList.contains('letter4') && ev.target.value != "") {
-            ev.target.disabled = true
+function checkEnter(currentTile, key) {
+    if (key === "Enter") {
+        if (currentTile.classList.contains('letter4') && currentTile.value != "") {
+            currentTile.disabled = true
             submit()
         }
     }

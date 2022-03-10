@@ -60,12 +60,14 @@ input {
     font-size: 6vw;
     width: 10vw;
     height: calc(100vw * .10);
+    touch-action: manipulation;
     /* -webkit-appearance: none; */
 }
 
 #gameBoard {
     margin-top: 3vh;
     margin-bottom: 3vh;
+    touch-action: manipulation;
 }
 
 #keyBoard {
@@ -75,6 +77,7 @@ input {
     margin-top: 5vh;
     margin-left: 2vw;
     margin-right: 2vw;
+    touch-action: manipulation;
 }
 
 .keyBoardRows {
@@ -104,11 +107,12 @@ input {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
+    touch-action: manipulation;
 }
 
 #back, #enter {
-    width: 16vw;
+    width: 13vw;
+    font-size: 5.5vw;
 }
 
 /*Hopefully make my game board visible for people on iOS*/
@@ -159,5 +163,6 @@ input:disabled {
 
     #back, #enter {
         width: 10vw;
+        font-size: 3vw;
     }
 }

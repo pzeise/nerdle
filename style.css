@@ -92,11 +92,11 @@ input {
 .key {
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    line-height: calc(.055*100vw);
-    font-size: 3vw;
+    line-height: calc(.095*100vw);
+    font-size: 6vw;
     background-color: #E0E0E4;
-    width: 5vw;
-    height: calc(.06*100vw);
+    width: 8vw;
+    height: calc(.1*100vw);
     border-radius: 3px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -148,5 +148,12 @@ input:disabled {
     #secondRow {
         margin-left: 18vw;
         margin-right: 18vw;
+    }
+    .key {
+        line-height: calc(.055*100vw);
+        font-size: 3vw;
+        width: 5vw;
+        height: calc(.06*100vw);
+        border-radius: 3px;
     }
 }

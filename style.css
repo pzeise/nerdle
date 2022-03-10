@@ -9,6 +9,40 @@ h1 {
     justify-content: center;
 }
 
+.hidden {
+    display: none;
+}
+
+#popup {
+    position: absolute;
+    width: 30rem;
+    height: 30rem;
+    left: calc((100vw - 30rem)/2);
+    top: 20vh;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: darkgray;
+    background-color: black;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+#popup #popupHead { 
+    text-align: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+#popup .reset { 
+    display: absolute;
+    width: 50%;
+    bottom: 5vh;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: x-large
+}
+
 input { 
     background-color: grey;
     color: white;
@@ -94,6 +128,11 @@ input:disabled {
 @media (max-width: 800px) {
     h1 {
         font-size: 5vw;
+    }
+    #popup {
+        width: 60vw;
+        height: 40vh;
+        left: 20vw
     }
     input { 
         font-size: 6vw;

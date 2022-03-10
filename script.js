@@ -51,6 +51,7 @@ attempts.forEach(attempt => {
         letter.disabled = true
         letter.autocorrect = "off"
         letter.autocapitalize = "none"
+        letter.onfocus = "blur();"
     }
 })
 //enable first letter

@@ -20,21 +20,24 @@ function updateColor (green, yellow, tiles) {
     tiles.forEach(tile => {
         tile.style.background = "rgb(64, 62, 59)"
         keyBoard.forEach(key => {
-            if (key.innerText === tile.value){
+            if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
                 key.style.background = "rgb(64, 62, 59)"
             }})
     })
     green.forEach(tile => {
         tile.style.background = "darkgreen"
-        keyBoard.forEach(key => {
-            if (key.innerText === tile.value){
-                key.style.background = "darkgreen"
-            }})
+        for (i = keyBoard.length-1; i >= 0; i--) {
+            if (keyBoard[i].innerText === tile.value) {
+                keyBoard[i].style.background = "darkgreen"
+                //remove from array so I can dont color over it later in case of double letters
+                keyBoardLocked.push(keyBoard[i])
+            }
+        }
     })
     yellow.forEach(tile => {
         tile.style.background = "goldenrod"
         keyBoard.forEach(key => {
-            if (key.innerText === tile.value){
+            if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
                 key.style.background = "goldenrod"
         }})
     })

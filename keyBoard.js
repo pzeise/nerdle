@@ -10,6 +10,7 @@ setupKeys = [
 let firstRow = document.querySelector("#firstRow")
 let secondRow = document.querySelector("#secondRow")
 let thirdRow = document.querySelector("#thirdRow")
+let keyBoardLocked = []
 
 for (i = 0; i < setupKeys.length; i++) {
     let key = document.createElement("an")
@@ -26,7 +27,7 @@ for (i = 0; i < setupKeys.length; i++) {
     }
 }
 
-const keyBoard = document.querySelectorAll(".key")
+let keyBoard = document.querySelectorAll(".key")
 
 function keyBoardType (key) {
     let currentTile = document.querySelector(".currentTile")

@@ -8,18 +8,10 @@ let correctTiles = []
 let possibleTiles = []
 let userGuess = []
 
-function reset () {
-    letterLog = {}
-    correctTiles = []
-    possibleTiles = []
-    userGuess = []
-}
-
 
 function submit () {
     //reset all global variables
     reset()
-
     //create a log of letters so we can account for double letters in guess and answers
     letterLog = dailyWord.reduce((total, word) => {
         if (word in total) {
@@ -29,15 +21,9 @@ function submit () {
         }
         return total
     }, {})
-
-    //Call verifyGuess with checkAnswer as a call back function. 
-    //call everything else from within there
     
     verifyGuess()
 }
-
-//spols
-//sootl
 
 function checkAnswer () {
 
@@ -70,12 +56,15 @@ function checkAnswer () {
 
 function checkWin (guess) {
     let currentRow = document.querySelector(`.currentRow`)
+    let popup = document.querySelector(`#popup`)
     if (guess.toString() === dailyWord.toString()) {
         currentRow.classList.remove(`currentRow`)
-        document.querySelector(`h1`).innerText = `YOU WIN!`
+        popup.firstElementChild.innerHTML = `Congrats!<br>You Won!`
+        popup.classList.remove(`hidden`)
         return true
     } else if (currentRow.id === `attempt6`) {
-        document.querySelector(`h1`).innerText = `No Dice the word was ${displayWord} :( Better luck tomorrow!` 
+        popup.firstElementChild.innerHTML = `No Dice the word was ${displayWord} :(<br>Better luck next time!` 
+        popup.classList.remove(`hidden`)
         return true
     } else return false
 }

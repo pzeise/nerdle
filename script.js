@@ -5,7 +5,6 @@
 
 
 let attempts = document.querySelectorAll(".attempts")
-let turn = 0
 
 let wordChoices = [
     "anime", "dwarf", "furry", 
@@ -24,8 +23,14 @@ let wordChoices = [
     "pixie", "knoll", "gnoll",
     "amber", "ninja", "shark",
 ]
-let displayWord = pickDailyWord(wordChoices)
+//use a dummy array to hold the words and allow a reset to avoid duplicates
+let unusedWordChoices = wordChoices
+
+//pick a new word each day
+let displayWord = pickDailyWord(unusedWordChoices)
 let dailyWord = displayWord.split("")
+
+//cheat
 console.log(dailyWord)
 
 function pickDailyWord (options) {

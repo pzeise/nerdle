@@ -26,6 +26,13 @@ input {
     /* -webkit-appearance: none; */
 }
 
+.keyBoardRows {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 /*Hopefully make my game board visible for people on iOS*/
 input:disabled {
     -webkit-text-fill-color: currentColor;

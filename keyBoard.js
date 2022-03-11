@@ -14,7 +14,7 @@ let keyBoardLocked = []
 
 for (i = 0; i < setupKeys.length; i++) {
     let key = document.createElement("an")
-    key.addEventListener(`touchstart`, ev => keyBoardType(ev))
+    // key.addEventListener(`touchstart`, ev => keyBoardType(ev))
     key.addEventListener(`click`, ev => keyBoardType(ev))
     key.id = `${setupKeys[i]}`
     key.classList.add(`key`)

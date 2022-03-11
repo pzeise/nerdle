@@ -64,6 +64,19 @@ input {
     /* -webkit-appearance: none; */
 }
 
+/* .letter1 {
+    animation: tileBounce 10s infinite alternate;
+}
+
+@keyframes tileBounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-1vh);
+    }
+} */
+
 #gameBoard {
     margin-top: 3vh;
     margin-bottom: 3vh;

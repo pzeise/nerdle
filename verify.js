@@ -36,7 +36,7 @@ function invalidWord (badWord) {
 
 function turnEnd (res, checkString, printString) {
     if (wordChoices.some(word => word === printString) || res.ok) {
-        updateColor(correctTiles, possibleTiles, checkString)
+        updatColor(correctTiles, possibleTiles, checkString)
         if (!checkWin(userGuess)) {
             bumpRow()
         }

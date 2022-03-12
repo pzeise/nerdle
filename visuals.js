@@ -26,6 +26,7 @@ function updateColor (green, yellow, tiles) {
     })
     green.forEach(tile => {
         tile.style.background = "darkgreen"
+        tile.classList.add("animate")
         for (i = keyBoard.length-1; i >= 0; i--) {
             if (keyBoard[i].innerText === tile.value) {
                 keyBoard[i].style.background = "darkgreen"
@@ -36,6 +37,7 @@ function updateColor (green, yellow, tiles) {
     })
     yellow.forEach(tile => {
         tile.style.background = "goldenrod"
+        tile.classList.add("animate")
         keyBoard.forEach(key => {
             if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
                 key.style.background = "goldenrod"

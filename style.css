@@ -64,19 +64,6 @@ input {
     /* -webkit-appearance: none; */
 }
 
-/* .letter1 {
-    animation: tileBounce 10s infinite alternate;
-}
-
-@keyframes tileBounce {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-1vh);
-    }
-} */
-
 #gameBoard {
     margin-top: 3vh;
     margin-bottom: 3vh;
@@ -177,5 +164,20 @@ input:disabled {
     #back, #enter {
         width: 10vw;
         font-size: 3vw;
+    }
+}
+
+
+.animate {
+    /* animation: tileBounce 10s infinite alternate; */
+    animation: tileBounce 0.3s 2 alternate;
+}
+
+@keyframes tileBounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-1vh);
     }
 }

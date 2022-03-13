@@ -68,7 +68,7 @@ first.classList.add(`currentTile`)
 attempts[0].classList.add(`currentRow`)
 
 //listen as you type
-let allLetters = document.querySelectorAll("input")
+let allLetters = document.querySelectorAll(".letter")
 
 allLetters.forEach(input => {
     input.addEventListener("keydown", letter => {

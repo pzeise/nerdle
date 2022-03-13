@@ -16,6 +16,7 @@ function resetGame () {
     allLetters.forEach(letter => {
         letter.style.background = "grey"
         letter.value = ""
+        letter.classList.remove(`animate`)
     })
     keyBoard.forEach(key => key.style.background = "#E0E0E4")
     popup.classList.add(`hidden`)

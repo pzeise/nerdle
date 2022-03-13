@@ -37,7 +37,7 @@ function keyBoardType (key) {
         checkBackspace(currentTile, "Backspace")
     } else if (key.target.id === "enter") {
         checkEnter(currentTile, "Enter")
-    } else {
+    } else if (currentTile.value.length != currentTile.maxLength) {
         currentTile.value = key.target.innerText
         typing(currentTile, key.target.innerText)
     }

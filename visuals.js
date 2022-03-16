@@ -17,57 +17,36 @@ function bumpRow () {
 }
 
 function updateColor (green, yellow, tiles) {
+    let i = 0;
     tiles.forEach(tile => {
-        if (green.some(x => x === tile)) {
-            tile.style.background = "darkgreen"
-            tile.classList.add("animate")
-                for (i = keyBoard.length-1; i >= 0; i--) {
-                    if (keyBoard[i].innerText === tile.value) {
-                        keyBoard[i].style.background = "darkgreen"
-                        //remove from array so I can dont color over it later in case of double letters
-                        keyBoardLocked.push(keyBoard[i])
-                    }       
-                }                    
-        } else if (yellow.some(x => x === tile)) {
-            tile.style.background = "goldenrod"
-            tile.classList.add("animate")
-            keyBoard.forEach(key => {
-                if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
-                    key.style.background = "goldenrod"
-                }
-            })
-        } else {
-            tile.style.background = "rgb(64, 62, 59)"
-            tile.classList.add("animate")
-            keyBoard.forEach(key => {
-                if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
-                    key.style.background = "rgb(64, 62, 59)"
-                }
-            })
-        }
+        setTimeout(() => {
+            if (green.some(x => x === tile)) {
+                tile.style.background = "darkgreen"
+                tile.classList.add("animate")
+                    for (i = keyBoard.length-1; i >= 0; i--) {
+                        if (keyBoard[i].innerText === tile.value) {
+                            keyBoard[i].style.background = "darkgreen"
+                            //remove from array so I can dont color over it later in case of double letters
+                            keyBoardLocked.push(keyBoard[i])
+                        }       
+                    }                    
+            } else if (yellow.some(x => x === tile)) {
+                tile.style.background = "goldenrod"
+                tile.classList.add("animate")
+                keyBoard.forEach(key => {
+                    if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
+                        key.style.background = "goldenrod"
+                    }
+                })
+            } else {
+                tile.style.background = "rgb(64, 62, 59)"
+                tile.classList.add("animate")
+                keyBoard.forEach(key => {
+                    if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
+                        key.style.background = "rgb(64, 62, 59)"
+                    }
+                })
+        }}, i * 600);
+        i++       
     })
-    
-    
-    
-    
-    
-    // green.forEach(tile => {
-    //     tile.style.background = "darkgreen"
-    //     tile.classList.add("animate")
-    //     for (i = keyBoard.length-1; i >= 0; i--) {
-    //         if (keyBoard[i].innerText === tile.value) {
-    //             keyBoard[i].style.background = "darkgreen"
-    //             //remove from array so I can dont color over it later in case of double letters
-    //             keyBoardLocked.push(keyBoard[i])
-    //         }
-    //     }
-    // })
-    // yellow.forEach(tile => {
-    //     tile.style.background = "goldenrod"
-    //     tile.classList.add("animate")
-    //     keyBoard.forEach(key => {
-    //         if (key.innerText === tile.value && !keyBoardLocked.some(x => x.innerText === key.innerText)){
-    //             key.style.background = "goldenrod"
-    //     }})
-    // })
 }

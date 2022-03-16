@@ -38,7 +38,7 @@ function turnEnd (res, checkString, printString) {
     if (wordChoices.some(word => word === printString) || res.ok) {
         updateColor(correctTiles, possibleTiles, checkString)
         if (!checkWin(userGuess)) {
-            bumpRow()
+            setTimeout(() => {bumpRow()}, 3000) 
         }
         return
     } else {

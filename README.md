@@ -20,3 +20,4 @@ Stretch Goals
 > As a player I want the game to give out a peggle style victory sound when the word is guessed.
 > As a player I want the game to display an onscreen keyboard and turn the letters the color of the best result you have guessed.
 > As a player I want the game to give me a slick way to share the results to social media platforms.
+Handle errors and send them to front end somehow

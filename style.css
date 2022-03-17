@@ -1,5 +1,6 @@
 body {
     background-color: rgb(49, 49, 49);
+    height: 100vh
 }
 
 h1 {
@@ -130,6 +131,21 @@ input:disabled {
     flex-wrap: nowrap;
 }
 
+
+.animate {
+    /* animation: tileBounce 10s infinite alternate; */
+    animation: tileBounce 0.3s 2 alternate;
+}
+
+@keyframes tileBounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-1vh);
+    }
+}
+
 @media only screen and (min-width:50rem) {
     h1 {
         font-size: 3vw;
@@ -144,40 +160,26 @@ input:disabled {
         width: 5rem;
         height: 5rem;
     }
+    
     .keyBoardRows {
-        margin-left: 13vw;
-        margin-right: 13vw;
+        margin-left: 25vw;
+        margin-right: 25vw;
     }
 
     #secondRow {
-        margin-left: 18vw;
-        margin-right: 18vw;
+        margin-left: 27.5vw;
+        margin-right: 27.5vw;
     }
     .key {
-        line-height: calc(.055*100vw);
-        font-size: 3vw;
-        width: 5vw;
-        height: calc(.06*100vw);
+        line-height: calc(.04*100vw);
+        font-size: 2vw;
+        width: 3.5vw;
+        height: calc(.04*100vw);
         border-radius: 3px;
     }
 
     #back, #enter {
-        width: 10vw;
-        font-size: 3vw;
-    }
-}
-
-
-.animate {
-    /* animation: tileBounce 10s infinite alternate; */
-    animation: tileBounce 0.3s 2 alternate;
-}
-
-@keyframes tileBounce {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-1vh);
+        width: 6vw;
+        font-size: 2vw;
     }
 }

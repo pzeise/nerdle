@@ -150,17 +150,19 @@ input:disabled {
     h1 {
         font-size: 3vw;
     }
+    
     #popup {
         width: 30rem;
         height: 30rem;
         left: calc((100vw - 30rem)/2);        
     }
+
     input { 
         font-size: 4rem;
         width: 5rem;
         height: 5rem;
     }
-    
+
     .keyBoardRows {
         margin-left: 25vw;
         margin-right: 25vw;
@@ -170,6 +172,7 @@ input:disabled {
         margin-left: 27.5vw;
         margin-right: 27.5vw;
     }
+
     .key {
         line-height: calc(.04*100vw);
         font-size: 2vw;

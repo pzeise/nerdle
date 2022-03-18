@@ -3,7 +3,7 @@
 ### Description
 A wordle spin off game where the answers are only selected from themed 5 letter words. Users have 6 chances to guess. The UI informs the user how accurate their guess was so they have a better idea on how to proceed with their future guesses. A Yellow tile appears when the user guess a letter that is in the word. A Green tle appears if the users guess is in the correct tile. A keyboard records the users guesses as they are made to let them easily visualize which letters to use. I use a dictionary API to verify that the words submitted are legitimate, and a manual array of themed 5 letter words that are randomly chosen from.
 
-![nerdleFinal](https://user-images.githubusercontent.com/97360775/158708103-76a048a3-def6-4b04-a612-f5fd177cd2d3.gif)
+![nerdleFinal](https://user-images.githubusercontent.com/97360775/159096087-2b100735-c844-4b01-a185-3fc9e3391606.gif)
 
 ### MVP Goals
  - [x] As a player I want the game to let me enter a five letter word in 5 boxes.
